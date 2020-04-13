@@ -1,5 +1,9 @@
 import random
 import time
+import json
+
+with open("words.json") as f:
+    words = json.load(f)["English"]
 
 
 class Game:
@@ -7,6 +11,7 @@ class Game:
         self.colors = self.init_colors(True)
         self.selections = [False] * 25
         self.last_touched = time.time()
+        self.words = random.sample(words, 25)
 
     def __repr__(self):
         return "Game repr"
@@ -40,4 +45,4 @@ class Game:
 
     @property
     def payload(self):
-        return {"selected": self.selections, "colors": self.colors}
+        return [[self.selections[n], self.colors[n], self.words[n]] for n in range(25)]

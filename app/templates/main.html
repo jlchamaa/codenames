@@ -3,54 +3,51 @@
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="width=device-width,initial-scale=1,minimal-ui" name="viewport">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/vue-material/dist/vue-material.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/vue-material/dist/theme/default-dark.css">
+    <link rel="stylesheet" href="/static/main.css">
     <title>Codenames!</title>
   </head>
   <body>
-      <div class="jumbotron", id="login_pane">
-        <h1 class="display-4">Let's Play Codenames!</h1>
-        <p class="lead">Enter the name of the server you want to join</p>
-        <hr class="my-4">
-      		<form id="login_form" class="form-inline" action="/login" method="get">
-      		  <label class="sr-only" for="inlineFormInputName2">Name</label>
-      		  <input type="text" name="game" class="form-control mb-2 mr-sm-2" id="server_form" placeholder="Server Name">
-      
-      		  <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
-      		  <div class="input-group mb-2 mr-sm-2">
-      			<div class="input-group-prepend">
-      			  <div class="input-group-text">@</div>
-      			</div>
-      			<input type="text" name="name" class="form-control" id="username_form" placeholder="Username">
-      		  </div>
-      
-      		  <button type="submit" id="joinserver" class="btn btn-primary mb-2">Submit</button>
-      		</form>
-      </div>
+    <div id="app">
+      <game></game>
+      ${ game_state }
+          <!--div class="jumbotron", id="login_pane">
+            <h1 class="display-4">Let's Play Codenames!</h1>
+            <p class="lead">Enter the name of the server you want to join</p>
+            <hr class="my-4">
+            <form id="login_form" class="form-inline" action="/login" method="get">
+              <label class="sr-only" for="inlineFormInputName2">Name</label>
+              <input type="text" name="game" class="form-control mb-2 mr-sm-2" id="server_form" placeholder="Server Name">
+          
+              <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
+              <div class="input-group mb-2 mr-sm-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"></div>
+                </div>
+                <input type="text" name="name" class="form-control" id="username_form" placeholder="Username">
+              </div>
+          
+              <button type="submit" id="joinserver" class="btn btn-primary mb-2">Submit</button>
+            </form>
+          </div-->
 
-      <div class="container-fluid", id="game_pane">
-          <h1 id="banner">Codenames!</h1>
-          {% for row in [0,1,2,3,4,] %}
-            <div class="row">
-            {% for col in [0,1,2,3,4] %}
-            <div class="col">
-            <button id="box-{{ 5*row + col }}" type="button" class="box btn btn-outline-secondary btn-lg btn-block">HECK</button>
-            </div>
-            {% endfor %}
-            </div>
-          {% endfor %}
-	  </div>
+    <md-switch v-model="spymaster" class="md-primary">Primary</md-switch>
+    </div>
 
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vue-material"></script>
+    <script src="/static/components.js"></script>
     <script src="/static/main.js"></script>
   </body>
 </html>

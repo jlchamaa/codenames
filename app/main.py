@@ -44,15 +44,6 @@ def hello():
 #     return "Something went wrong", 404
 
 
-def start_game(args):
-    if "game" not in args:
-        return "Didn't get a game id", 400
-    if "name" not in args:
-        return "Didn't get a name", 400
-    server.new_game(args["game"])
-    return args["game"], 200
-
-
 if __name__ == "__main__":
     # Only for debugging while developing
     socketio.run(app, host='0.0.0.0', debug=True, port=8080)
