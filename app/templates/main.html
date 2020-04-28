@@ -1,52 +1,30 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta content="width=device-width,initial-scale=1,minimal-ui" name="viewport">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons">
-    <link rel="stylesheet" href="https://unpkg.com/vue-material/dist/vue-material.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/vue-material/dist/theme/default-dark.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <link rel="stylesheet" href="/static/main.css">
     <title>Codenames!</title>
   </head>
   <body>
     <div id="app">
-      <game></game>
-      ${ game_state }
-          <!--div class="jumbotron", id="login_pane">
-            <h1 class="display-4">Let's Play Codenames!</h1>
-            <p class="lead">Enter the name of the server you want to join</p>
-            <hr class="my-4">
-            <form id="login_form" class="form-inline" action="/login" method="get">
-              <label class="sr-only" for="inlineFormInputName2">Name</label>
-              <input type="text" name="game" class="form-control mb-2 mr-sm-2" id="server_form" placeholder="Server Name">
-          
-              <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
-              <div class="input-group mb-2 mr-sm-2">
-                <div class="input-group-prepend">
-                  <div class="input-group-text"></div>
-                </div>
-                <input type="text" name="name" class="form-control" id="username_form" placeholder="Username">
-              </div>
-          
-              <button type="submit" id="joinserver" class="btn btn-primary mb-2">Submit</button>
-            </form>
-          </div-->
+      <v-app>
+	    <v-content>
+	  	  <game></game>
+	  	  <hr/>
+	  	  <v-switch v-model="spymaster">Primary</v-switch>
 
-    <md-switch v-model="spymaster" class="md-primary">Primary</md-switch>
+	    </v-content>
+      </v-app>
     </div>
-
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
-    <!-- development version, includes helpful console warnings -->
-    <script src="https://unpkg.com/vue"></script>
-    <script src="https://unpkg.com/vue-material"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
     <script src="/static/components.js"></script>
     <script src="/static/main.js"></script>
   </body>

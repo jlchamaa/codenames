@@ -1,16 +1,20 @@
-.md-button{
-    min-width: 40px;
+.col > button.codename.v-btn{
     height: 100px;
-    font-size: 2vw;
+    font-size: 1.3vw;
+    border-width: 2px;
+    margin: 8px;
+    padding: 0px;
+    /*
     margin: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
+    */
 }
-.md-black{
-    color: black !important;
+button.codename.black--text{
+    border-width: 7px !important;
 }
-.md-black.md-raised{
+button.codename.black:not(.v-btn--outlined){
     color: white !important;
-    background-color: black !important;
+    border-width: 5px !important;
 }

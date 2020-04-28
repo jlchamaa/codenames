@@ -5,8 +5,10 @@ let button_colors = {
 	"death": "warning"}
 
 var socket = io();
-var server = Cookies.get("server");
-var username = Cookies.get("username");
+// var server = Cookies.get("server");
+// var username = Cookies.get("username");
+var server = "tmgs";
+var username = "jlc";
 console.log(server);
 console.log(server == undefined);
 if (server == undefined || username == undefined){
