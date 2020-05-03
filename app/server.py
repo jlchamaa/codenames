@@ -10,7 +10,7 @@ class Server:
 
     def new_game(self, name):
         if name not in self.games:
-            self.games[name] = Game()
+            self.games[name] = Game(name)
 
     def cull_games(self):
         for name, game in self.games.values():

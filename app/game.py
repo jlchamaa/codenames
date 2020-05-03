@@ -7,11 +7,19 @@ with open("words.json") as f:
 
 
 class Game:
-    def __init__(self):
-        self.colors = self.init_colors(True)
+    def __init__(self, name):
+        self.name = name
+        red_first = True
+        self.colors = self.init_colors(red_first)
         self.selections = [False] * 25
         self.last_touched = time.time()
         self.words = random.sample(words, 25)
+        self.blue = 8 if red_first else 9
+        self.red = 9 if red_first else 8
+        self.scores = {
+            "red": [], "blue": []
+        }
+        self.winner = None
 
     def __repr__(self):
         return "Game repr"
@@ -34,9 +42,22 @@ class Game:
         prototype[death] = "death"
         return prototype
 
-    def select(self, num):
+    def select(self, num, clicker):
         self.last_touched = time.time()
         self.selections[num] = True
+        color = self.colors[num]
+        if color == "red":
+            self.red -= 1
+            if self.red == 0:
+                self.winner = "red"
+            self.scores["red"].append(clicker)
+        if color == "blue":
+            self.blue -= 1
+            if self.blue == 0:
+                self.winner = "blue"
+            self.scores["blue"].append(clicker)
+        if color == "death":
+            self.winner = "blue" if clicker == "red" else "red"
 
     @property
     def unattended(self):
@@ -45,4 +66,11 @@ class Game:
 
     @property
     def payload(self):
-        return [[self.selections[n], self.colors[n], self.words[n]] for n in range(25)]
+        return {
+            "squares": [[self.selections[n], self.colors[n], self.words[n]] for n in range(25)],
+            "red": self.red,
+            "blue": self.blue,
+            "winner": self.winner,
+            "name": self.name,
+            "scores": self.scores,
+        }

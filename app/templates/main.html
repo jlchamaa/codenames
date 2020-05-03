@@ -12,8 +12,10 @@
     <div id="app">
       <v-app>
 	    <v-content>
+          <scoreboard :room="room" :color="color" :red="red" :blue="blue" :red_scores="red_scores" :blue_scores="blue_scores" :winner="winner"></scoreboard>
 	  	  <game></game>
 	  	  <hr/>
+          <h3> Spymaster Switch</h3>
 	  	  <v-switch v-model="spymaster">Primary</v-switch>
 
 	    </v-content>
@@ -26,6 +28,5 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
     <script src="/static/components.js"></script>
-    <script src="/static/main.js"></script>
   </body>
 </html>

@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from flask_socketio import SocketIO, emit, join_room
+from flask_socketio import SocketIO, emit, join_room, leave_room
 from server import Server
 app = Flask(__name__)
 socketio = SocketIO(app)
@@ -9,10 +9,17 @@ server = Server()
 @socketio.on('join')
 def on_join(data):
     print("We got a joiner!")
-    room = data["server"]
+    room = data["server"].lower()
     server.new_game(room)
     join_room(room)
     refresh_all(room)
+
+
+@socketio.on('leave')
+def leave_me_alone(data):
+    print("We're leaving")
+    room = data["server"].lower()
+    leave_room(room)
 
 
 def refresh_all(room):
@@ -21,29 +28,20 @@ def refresh_all(room):
         emit("refresh", game.payload, room=room)
 
 
-def select_box(room, box):
-    game = server.get_game(room)
-    game.select(box)
-
-
 @socketio.on('select')
-def my_event_handler(data):
+def select_box(data):
     box = int(data["selection"])
+    clicker = data["clicker"]
     room = data["server"]
-    select_box(room, box)
+    server.get_game(room).select(box, clicker)
     refresh_all(room)
 
 
 @app.route('/', methods=['GET'])
 def hello():
     return render_template("main.html")
-# game_id, resp = start_game(args)
-# if resp == 200:
-#     return redirect("/game/" + game_id)
-# else:
-#     return "Something went wrong", 404
 
 
 if __name__ == "__main__":
     # Only for debugging while developing
-    socketio.run(app, host='0.0.0.0', debug=True, port=8080)
+    socketio.run(app, host='0.0.0.0', debug=True, port=1879)
