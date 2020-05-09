@@ -46,7 +46,6 @@ Vue.component('game', {
 })
 
 Vue.component('scoreboard', {
-  // I want a scoreboard that is a bunch of unfilled circles that fill in with the names of players who score them!
   delimiters: ['<%', '%>'],
   props: ["room", "color", "red", "blue", "red_scores", "blue_scores"],
   template: `
@@ -59,7 +58,10 @@ Vue.component('scoreboard', {
               <v-avatar size="36" color="blue" v-for="scorer in blue_scores">
                 <span class="white--text headline"><% scorer %></span>
               </v-avatar>
-                <v-icon large color="blue">mdi-numeric-<% blue %>-circle-outline </v-icon>
+              <v-avatar size="36" color="blue" v-for="n in blue" :key="n">
+                <v-icon large color="white">mdi-checkbox-blank-circle</v-icon>
+              </v-avatar>
+              <v-icon large color="blue">mdi-numeric-<% blue %>-circle-outline </v-icon>
             </v-col>
             <v-col cols="12">
               <v-avatar size="36" color="red" v-for="scorer in red_scores">
@@ -68,7 +70,7 @@ Vue.component('scoreboard', {
               <v-avatar size="36" color="red" v-for="n in red" :key="n"> 
                 <v-icon large color="white">mdi-checkbox-blank-circle</v-icon>
               </v-avatar>
-                <v-icon large color="red">mdi-numeric-<% red %>-circle-outline </v-icon>
+              <v-icon large color="red">mdi-numeric-<% red %>-circle-outline </v-icon>
             </v-col>
           </v-row>
         </v-col>

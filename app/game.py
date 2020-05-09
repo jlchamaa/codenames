@@ -1,9 +1,8 @@
 import random
 import time
-import json
 
-with open("words.json") as f:
-    words = json.load(f)["English"]
+with open("words.txt") as f:
+    words = f.read().splitlines()
 
 
 class Game:
@@ -44,6 +43,8 @@ class Game:
 
     def select(self, num, clicker):
         self.last_touched = time.time()
+        if self.selections[num]:
+            return
         self.selections[num] = True
         color = self.colors[num]
         if color == "red":
